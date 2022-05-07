@@ -2,12 +2,12 @@ const ChatMessage = ({ message, auth }) => {
   console.log(auth);
   return (
     <div
-      className={`flex items-center gap-x-4  mt-5  px-4 pb-4 max-w-xs border-solid	border-2 rounded-full border-gray-700 ${
+      className={`flex items-center gap-x-4  mt-5  px-4 pb-4 max-w-xs  ${
         auth.currentUser.uid === message.uid ? "flex-row-reverse" : ""
       }`}
     >
-      <img width="15" height="15" src={message.userImg} alt="" />
-      <p className="text-xs font-medium leading-3 text-gray-600">
+      <img className="w-8 h-8 md:w-10 md:h-10" src={message.userImg} alt="" />
+      <p className="text-sm text-left font-medium text-gray-600 border-solid	border-2 rounded-xl border-gray-700 py-2.5 px-4">
         {message.text}
       </p>
     </div>

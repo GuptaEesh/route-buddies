@@ -9,7 +9,8 @@ const ChatPane = ({
   const message = {
     userImg:
       "https://tuk-cdn.s3.amazonaws.com/assets/components/avatars/a_5.png",
-    text: "Hello there",
+    text:
+      "Hello there jbjkv jbjkv jbjkv jbjkv jbjkv jbjkv jbjkvjbjkv jbjkv jbjkv",
     uid: "sfhbhskj",
   };
   const auth = {
