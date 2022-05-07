@@ -1,10 +1,17 @@
-import React from 'react'
+import { ProfileViewer } from "../../components"
+
 
 const Explore = () => {
+   
+
   return (
-    <div>
-      Explore
-    </div>
+      <div className="w-screen flex flex-col items-center ">
+   <ProfileViewer/>
+   <ProfileViewer/>
+   <ProfileViewer/>
+   <ProfileViewer/>
+        </div>
+    
   )
 }
 
