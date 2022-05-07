@@ -1,12 +1,37 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {useAuth} from '../../context';
+import { updateDataToFirestore } from "../../firebase-config";
 
 const UserRegistration = () => {
-  const [isShowRouteInput, setIsShowRouteInput] = useState(false);
-  const [checkpoint, setCheckpoint] = useState({});
+  const {authState:{user},dispatch} = useAuth();
+  const initialData={
+    fullName:user.displayName??"",
+    avatar:user.photoURL??"https://tuk-cdn.s3.amazonaws.com/assets/components/avatars/a_5.png",
+    profession:"",
+    description:"",
+    mode:"",
+    routes:[{start:"",end:""}]
+  }
+  const navigate=useNavigate();
+  const [registeredUser,setRegisteredUser]=useState(initialData)
+  // const [isShowRouteInput, setIsShowRouteInput] = useState(false);
+  // const [checkpoint, setCheckpoint] = useState({});
   // const [route, setRoute] = useState([{}]);
-
-  const userImg =
-    "https://tuk-cdn.s3.amazonaws.com/assets/components/avatars/a_5.png";
+  const inputHandler=e=>{
+        setRegisteredUser(userFields=>({...userFields,[e.target.name]:e.target.value}))
+  }
+  const submitHandler= async(e)=>{
+      e.preventDefault();
+      await updateDataToFirestore(user?.uid,registeredUser,dispatch);
+      navigate('/explore');
+  }
+const startLocationHandler=e=>{
+  setRegisteredUser(user=>({...user,routes:[{...user.routes[0],start:e.target.value}]}))
+}
+const endLocationHandler=e=>{
+  setRegisteredUser(user=>({...user,routes:[{...user.routes[0],end:e.target.value}]}))
+}
 
     // const handleRoute = () => {
     //   setRoute((prev) => [...prev, {checkpoint}])
@@ -16,11 +41,12 @@ const UserRegistration = () => {
 
     //     handleRoute()
 
+  // const handleAddCheckpoint = (e) => {
+  //   const { name, value } = e.target;
+  //   setCheckpoint({[name] : value});
+  // };
 
-  const handleAddCheckpoint = (e) => {
-    const { name, value } = e.target;
-    setCheckpoint({[name] : value});
-  };
+  
 
   return (
     <div className="px-2 py-12 ">
@@ -36,37 +62,37 @@ const UserRegistration = () => {
                   <div className="col-auto md:col-span-2">
                     <div className="w-40 h-40 bg-cover rounded-md mx-auto">
                       <img
-                        src={userImg}
+                        src={registeredUser.avatar}
                         alt="pfp"
                         className="rounded-full h-full w-full overflow-hidden shadow"
                       />
                     </div>
                   </div>
 
-                  <div className="col-auto md:col-start-3 md:col-span-3">
+                  <form onSubmit={submitHandler} className="col-auto md:col-start-3 md:col-span-3">
                     <div>
                       <p className="text-base font-medium leading-none text-gray-800">
                         Full Name
                       </p>
                       <input
+                      required
                         placeholder="Johnrao Doekar"
+                        name="fullName"
+                        onChange={inputHandler}
+                        value={registeredUser.fullName}
                         className="w-full p-3 mt-4 border border-gray-300 rounded outline-none focus:bg-gray-50"
                       />
                     </div>
-                    <div className="mt-4">
-                      <p className="text-base font-medium leading-none text-gray-800">
-                        Location
-                      </p>
-                      <input
-                        placeholder="Bangalore"
-                        className="w-full p-3 mt-4 border border-gray-300 rounded outline-none focus:bg-gray-50"
-                      />
-                    </div>
+                    
                     <div className="mt-4">
                       <p className="text-base font-medium leading-none text-gray-800">
                         Profession
                       </p>
                       <input
+                      required
+                      name="profession"
+                      value={registeredUser.profession}
+                      onChange={inputHandler}
                         placeholder="Full-Stack Developer at XYZ"
                         className="w-full p-3 mt-4 border border-gray-300 rounded outline-none focus:bg-gray-50"
                       />
@@ -76,27 +102,68 @@ const UserRegistration = () => {
                         Description
                       </p>
                       <input
+                      required
+                      name="description"
+                      value={registeredUser.description}
+                      onChange={inputHandler}
                         placeholder="Coder during the day, Netflix in the night"
                         className="w-full p-3 mt-4 border border-gray-300 rounded outline-none focus:bg-gray-50"
                       />
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center lg:max-w-[500px] w-full mt-10 mx-auto">
+                    <div className="mt-4">
+                      <p className="text-base font-medium leading-none text-gray-800">
+                        Mode of Transport
+                      </p>
+                      <input
+                      required
+                      name="mode"
+                      value={registeredUser.mode}
+
+                      onChange={inputHandler}
+                        placeholder="Type your mode of transport"
+                        className="w-full p-3 mt-4 border border-gray-300 rounded outline-none focus:bg-gray-50"
+                      />
+                    </div>
+                    <div className="flex items-center lg:max-w-[500px] w-full mt-10 mx-auto">
                 <p className="text-lg font-medium leading-none text-gray-800">
                   Start
                 </p>
                 <input
+                required
                   placeholder="Start location"
                   name="start"
-                  value={checkpoint.start}
+                  value={registeredUser.routes[0].start}
                   className="w-full p-3 ml-5 border border-gray-300 rounded outline-none focus:bg-gray-50"
-                  onChange={(e) => handleAddCheckpoint(e)}
+                  onChange={startLocationHandler}
                   
                 />
               </div>
-              {isShowRouteInput ? (
+              <div className="flex items-center lg:max-w-[500px] w-full mt-10 mx-auto">
+                <p className="text-lg font-medium leading-none text-gray-800">
+                  End
+                </p>
+                <input
+                required
+                  placeholder="End location"
+                  name="end"
+                  value={registeredUser.routes[0].end}
+                  className="w-full p-3 ml-7 border border-gray-300 rounded outline-none focus:bg-gray-50"
+                  onChange={endLocationHandler}
+                />
+              </div>
+              <div className="flex mt-8 flex-col flex-wrap justify-self-start w-full px-7 md:flex-row md:justify-end gap-x-4 gap-y-4">
+                <button className="bg-white border-indigo-700 rounded hover:bg-gray-50 transform duration-300 ease-in-out text-sm font-medium px-6 py-4 text-indigo-700 border md:max-w-[95px]  w-full ">
+                  Cancel
+                </button>
+                <button type="submit" className="bg-indigo-700 rounded hover:bg-indigo-600 transform duration-300 ease-in-out text-sm font-medium px-6 py-4 text-white md:max-w-[144px] w-full ">
+                  Save Changes
+                </button>
+              </div>
+                  </form>
+                </div>
+              </div>
+              
+              {/* {isShowRouteInput ? (
                 <div className="my-4 mx-auto lg:max-w-[500px] w-full">
                   <p className="text-base font-medium leading-none text-gray-800">
                     Add Checkpoint
@@ -108,6 +175,7 @@ const UserRegistration = () => {
                       +
                     </button>
                     <input
+                    required
                       placeholder="Checkpoint"
                       name="check"
                       className="w-full p-3 border border-gray-300 rounded outline-none focus:bg-gray-50 ml-3"
@@ -123,28 +191,10 @@ const UserRegistration = () => {
                     Add route
                   </button>
                 </div>
-              )}
-              <div className="flex items-center lg:max-w-[500px] w-full mt-10 mx-auto">
-                <p className="text-lg font-medium leading-none text-gray-800">
-                  End
-                </p>
-                <input
-                  placeholder="End location"
-                  name="end"
-                  value={checkpoint.end}
-                  className="w-full p-3 ml-7 border border-gray-300 rounded outline-none focus:bg-gray-50"
-                  onChange={(e) => handleAddCheckpoint(e)}
-                />
-              </div>
-              <hr className="h-[1px] bg-gray-100 my-14" />
-              <div className="flex flex-col flex-wrap items-center justify-center w-full px-7 md:flex-row md:justify-end gap-x-4 gap-y-4">
-                <button className="bg-white border-indigo-700 rounded hover:bg-gray-50 transform duration-300 ease-in-out text-sm font-medium px-6 py-4 text-indigo-700 border md:max-w-[95px]  w-full ">
-                  Cancel
-                </button>
-                <button className="bg-indigo-700 rounded hover:bg-indigo-600 transform duration-300 ease-in-out text-sm font-medium px-6 py-4 text-white md:max-w-[144px] w-full ">
-                  Save Changes
-                </button>
-              </div>
+              )} */}
+              
+              {/* <hr className="h-[1px] bg-gray-100 my-14" /> */}
+             
             </div>
           </div>
         </div>
