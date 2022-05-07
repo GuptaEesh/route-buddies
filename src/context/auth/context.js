@@ -1,12 +1,26 @@
-import { createContext, useContext,useReducer } from "react";
-import { authReducer, initialState } from "./reducer";
+import { createContext, useContext, useEffect, useReducer } from 'react';
+import {  getCurrentUser } from '../../firebase-config';
+import { authReducer, initialState } from './reducer';
 
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [authState,dispatch] = useReducer(authReducer,initialState);
+  const [authState, dispatch] = useReducer(authReducer, initialState);
+
+  useEffect(()=>{
+    (async()=> {
+      if (authState.token) {
+        
+        getCurrentUser(dispatch);
+      }
+    })();
+  },[]);
+
+  console.log(authState);
   return (
-    <AuthContext.Provider value={{ authState, dispatch }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ authState, dispatch }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
