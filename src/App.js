@@ -1,5 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
+import { NavBar } from "./components";
 import { RedirectsAuth, RequiresAuth } from "./router";
 import {
   Home,
@@ -12,8 +13,11 @@ import {
 } from "./screen";
 
 function App() {
+  const location = useLocation();
+  const route = location.pathname === "/";
   return (
     <div className="App">
+      {!route && <NavBar />}
       <Routes>
         {/* Public Routes */}
         <Route path="/" exact element={<Home />} />
