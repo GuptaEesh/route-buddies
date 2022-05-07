@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getMatchedUserData } from "../../firebase-config";
 
 const MatchProfile = ({
-  // id = "fddf",
-  userImg = "https://image.freepik.com/free-photo/indoor-picture-cheerful-handsome-young-man-having-folded-hands-looking-directly-smiling-sincerely-wearing-casual-clothes_176532-10257.jpg",
   userCoverImg = "https://tuk-cdn.s3.amazonaws.com/assets/components/grid_cards/gc_29.png",
-  userName = "dummyUser",
-  designation = "Professional",
-  userStatus = "New in the city",
-
-  source = "Karnal",
-  destination = "Delhi",
 }) => {
+  const [matchedUser, setMatchedUser] = useState()
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      const res = await getMatchedUserData(id);
+      setMatchedUser(res)
+    })();
+  }, [id]);
+
+  console.log(matchedUser);
+
+  if(!matchedUser) return <h1>Loading...</h1>
+
   return (
     <>
       <div className="flex items-center justify-center w-full py-8">
@@ -20,13 +29,13 @@ const MatchProfile = ({
             <img
               className="h-56 shadow rounded-t w-full object-cover object-center"
               src={userCoverImg}
-              alt
+              alt="cover image"
             />
             <div className="inset-0 m-auto w-24 h-24 absolute bottom-0 -mb-12 rounded border-2 shadow border-white">
               <img
                 className="w-full h-full overflow-hidden object-cover rounded"
-                src={userImg}
-                alt
+                src={matchedUser.avatar}
+                alt={matchedUser.fullName}
               />
             </div>
           </div>
@@ -124,14 +133,14 @@ const MatchProfile = ({
               <div className=" w-full ">
                 <div className="text-center mb-3 xl:mb-0 flex flex-col  items-center justify-between">
                   <h2 className="mb-3 text-2xl text-gray-800 font-medium tracking-normal">
-                    {userName}
+                    {matchedUser.fullName}
                   </h2>
                   <div className="text-sm bg-gray-200 text-gray-600 px-5 py-1 font-normal rounded-full">
-                    {designation}
+                    {matchedUser.profession}
                   </div>
                 </div>
                 <p className="text-center mt-4 text-md tracking-normal text-gray-600 leading-5">
-                  {userStatus}
+                  {matchedUser.description}
                 </p>
               </div>
 
@@ -164,21 +173,24 @@ const MatchProfile = ({
                 <div className="flex items-center justify-between sm:px-24">
                   <div className="flex flex-col items-center">
                     <p className="text-sm font-medium leading-4 text-indigo-700 ">
-                      {source}
+                      {matchedUser.routes[0].start}
                     </p>
                   </div>
                   <div className="flex flex-col items-center pl-10 md:pl-8 lg:pl-20">
                     <p className="text-sm font-medium leading-4 text-indigo-700">
-                      {destination}
+                      {matchedUser.routes[0].end}
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="w-full flex-col md:flex-row justify-center flex pt-6">
-                <button className="ml-0 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-3 md:px-6 py-2 text-sm">
+                <Link
+                  to={`/chat/${id}`}
+                  className="ml-0 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-3 md:px-6 py-2 text-sm"
+                >
                   Message
-                </button>
+                </Link>
               </div>
             </div>
           </div>
