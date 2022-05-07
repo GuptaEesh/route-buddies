@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import { ChatPane } from "./ChatComponents/ChatPane";
 
 const Chat = () => {
   return (
     <div>
-      Chat
+      <h1>Chat</h1>
+      <ChatPane />
     </div>
-  )
-}
+  );
+};
 
-export  {Chat}
+export { Chat };
