@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   setPersistence,
-  inMemoryPersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -22,14 +22,14 @@ const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 const auth = getAuth(firebaseApp);
 
-const loginUser = async (dispatch,navigate) => {
+const loginUser = async (dispatch, navigate) => {
   try {
-    await setPersistence(auth, inMemoryPersistence);
+    await setPersistence(auth, browserLocalPersistence);
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
     dispatch({ type: "LOGIN", payload: user });
-    navigate('/registration')
+    navigate("/registration");
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -39,26 +39,25 @@ const loginUser = async (dispatch,navigate) => {
   }
 };
 
-const getCurrentUser = async(dispatch) => {
-
+const getCurrentUser = async (dispatch) => {
   try {
-     await auth.onAuthStateChanged((user)=>{
-      dispatch({type:'LOGIN',payload: user});
+    await auth.onAuthStateChanged((user) => {
+      if (user) {
+        dispatch({ type: "LOGIN", payload: user });
+      }
     });
-   
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-const logout = async(dispatch) => {
+const logout = async (dispatch) => {
   try {
-    dispatch({type:'LOGOUT'});
+    dispatch({ type: "LOGOUT" });
     await auth.signOut();
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-
-export { auth, db, loginUser, getCurrentUser,logout };
+export { auth, db, loginUser, getCurrentUser, logout };
