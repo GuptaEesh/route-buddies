@@ -34,7 +34,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
-      {!route && <Footer />}
+      <Footer />
     </div>
   );
 }
