@@ -1,8 +1,13 @@
 import { loginUser } from "../../firebase-config";
 import { useAuth } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const {dispatch} = useAuth();
+  const {
+    authState: { token },
+    dispatch,
+  } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <div className="relative h-screen bg-white overflow-hidden">
@@ -13,8 +18,7 @@ function Home() {
             fill="currentColor"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
-            aria-hidden="true"
-          >
+            aria-hidden="true">
             <polygon points="50,0 100,0 50,100 0,100" />
           </svg>
 
@@ -34,20 +38,15 @@ function Home() {
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
                   <button
-                  onClick={()=> loginUser(dispatch) }
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
-                  >
+                    onClick={() =>
+                      token
+                        ? navigate("/registration")
+                        : loginUser(dispatch, navigate)
+                    }
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                     Get started
                   </button>
                 </div>
-                {/* <div className="mt-3 sm:mt-0 sm:ml-3">
-                    <Link
-                        to="/explore"
-                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
-                    >
-                        Live demo
-                    </Link>
-                    </div> */}
               </div>
             </div>
           </main>
