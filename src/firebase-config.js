@@ -5,8 +5,8 @@ import {
   setDoc,
   updateDoc,
   collection,
-  // query,
-  // where,
+  query,
+  where,
   getDocs,
   getDoc,
 } from "firebase/firestore";
@@ -134,6 +134,23 @@ const getUserData = async (uid, dispatch) => {
   }
 };
 
+const getMatchedUserData = async (uid) => {
+  try {
+    let matchedUser = null;
+    const q = query(collection(db, "Users"), where("uid", "==", uid));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      matchedUser = doc.data();
+    });
+
+    return matchedUser;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   auth,
   db,
@@ -143,4 +160,5 @@ export {
   addDataToFirestore,
   updateDataToFirestore,
   getUserMatches,
+  getMatchedUserData,
 };
