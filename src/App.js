@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Footer, NavBar } from "./components";
 import { RedirectsAuth, RequiresAuth } from "./router";
@@ -13,21 +13,20 @@ import {
 } from "./screen";
 
 function App() {
-  const location = useLocation();
-  const route = location.pathname === "/";
   return (
     <div className="App">
-      {!route && <NavBar />}
+      <NavBar />
       <Routes>
         {/* Public Routes */}
-        <Route path="/" exact element={<Home />} />
-        {/* Private Routes */}
 
         <Route element={<RedirectsAuth />}>
-          <Route path="/registration" element={<UserRegistration />} />
+          <Route path="/" exact element={<Home />} />
         </Route>
 
+        {/* Private Routes */}
+
         <Route element={<RequiresAuth />}>
+          <Route path="/registration" element={<UserRegistration />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/explore/:id" element={<MatchProfile />} />
           <Route path="/chat/:id" element={<Chat />} />

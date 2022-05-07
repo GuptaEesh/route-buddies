@@ -4,7 +4,7 @@ import { useAuth } from '../context';
 
 export const RedirectsAuth = () => {
   const {
-   token,
+   authState: {token},
   } = useAuth();
 
   const location = useLocation();

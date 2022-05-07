@@ -1,9 +1,9 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAuth } from '../context';
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useAuth } from "../context";
 
 export const RequiresAuth = () => {
   const {
-    token,
+    authState: { token },
   } = useAuth();
 
   const location = useLocation();
@@ -11,6 +11,6 @@ export const RequiresAuth = () => {
   return token ? (
     <Outlet />
   ) : (
-    <Navigate to={'/login'} state={{ from: location }} replace={true} />
+    <Navigate to={"/"} state={{ from: location }} replace={true} />
   );
 };
