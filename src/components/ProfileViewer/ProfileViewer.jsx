@@ -10,7 +10,7 @@ const ProfileViewer = ({id="fddf",userImg="https://tuk-cdn.s3.amazonaws.com/asse
             <div className="w-14 h-14 bg-cover rounded-md mr-3">
               <img
                 src={userImg}
-                alt
+                alt={userName}
                 className="rounded-full h-full w-full overflow-hidden shadow"
               />
             </div>
