@@ -17,10 +17,18 @@ const db = getFirestore(firebaseApp);
 const auth = getAuth(firebaseApp);
 const provider = new GoogleAuthProvider();
 
-const loginUser = async () => {
+const loginUser = async (dispatch) => {
   try {
-    const res = await signInWithPopup(auth, provider);
-    console.log(res);
+    const result = await signInWithPopup(auth, provider);
+     const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+
+    // The signed-in user info.
+    const user = result.user;
+    localStorage.setItem('token',token);
+    dispatch({type:'LOGIN',payload:{token,user}})
+    // console.log(token);
+    // console.log(user);
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;

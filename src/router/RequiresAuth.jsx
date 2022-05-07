@@ -3,7 +3,7 @@ import { useAuth } from '../context';
 
 export const RequiresAuth = () => {
   const {
-    token,
+    authState:{token},
   } = useAuth();
 
   const location = useLocation();
