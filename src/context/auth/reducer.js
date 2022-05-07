@@ -1,12 +1,14 @@
 export const initialState = {
-  token: localStorage.getItem("token"),
+  token: null,
 };
 
 export const authReducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "LOGIN":
-      return { ...state, ...action.payload };
+      return { ...action.payload , token: action.payload.accessToken };
+
+    case 'LOGOUT': 
+    return {...initialState};
 
     default:
       return state;
