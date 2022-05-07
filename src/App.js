@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-import { NavBar } from "./components";
+import { Footer, NavBar } from "./components";
 import { RedirectsAuth, RequiresAuth } from "./router";
 import {
   Home,
@@ -35,6 +35,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
+      {!route && <Footer />}
     </div>
   );
 }
