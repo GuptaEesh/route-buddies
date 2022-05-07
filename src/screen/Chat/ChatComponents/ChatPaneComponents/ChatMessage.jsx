@@ -2,7 +2,7 @@ const ChatMessage = ({ message, auth }) => {
   console.log(auth);
   return (
     <div
-      className={`flex items-center gap-x-4  mt-5  px-4 pb-4 ${
+      className={`flex items-center gap-x-4  mt-5  px-4 pb-4 max-w-xs border-solid	border-2 rounded-full border-gray-700 ${
         auth.currentUser.uid === message.uid ? "flex-row-reverse" : ""
       }`}
     >

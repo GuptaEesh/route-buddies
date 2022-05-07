@@ -19,14 +19,29 @@ const ChatPane = ({
     <>
       <div>
         <div className="py-12 px-4">
-          <div className="lg:max-w-[548px] w-full mx-auto bg-gray-200 mt-8 px-6 py-6 relative">
-            <div className="bg-white">
-              <hr className="border  border-gray-200 my-4" />
-              <div className=" px-4 ">
-                <p className="text-xs font-medium leading-3 text-gray-800">
-                  {userName}
-                </p>
-              </div>
+          <div className="lg:max-w-[548px] w-full mx-auto bg-gray-200 mt-8 px-6 py-6 relative h-[500px] flex flex-col">
+            <div className=" px-4 ">
+              <p className="text-lg font-medium leading-3 text-gray-800">
+                {userName}
+              </p>
+            </div>
+            <hr className="border  border-gray-200 my-4" />
+            <div className="bg-white grow overflow-y-scroll">
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
+              <ChatMessage message={message} auth={auth} />
               <ChatMessage message={message} auth={auth} />
               <ChatMessage message={message} auth={auth} />
             </div>
