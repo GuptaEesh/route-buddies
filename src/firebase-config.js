@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
   doc,
@@ -9,23 +9,23 @@ import {
   // where,
   getDocs,
   getDoc,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   setPersistence,
   browserLocalPersistence,
-} from "firebase/auth";
+} from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCSRq45aj8UC2sxCvCGUY36Tx5HqK31-xI",
-  authDomain: "route-buddies.firebaseapp.com",
-  projectId: "route-buddies",
-  storageBucket: "route-buddies.appspot.com",
-  messagingSenderId: "915509205240",
-  appId: "1:915509205240:web:0dda338ef73dec7c07030d",
-  measurementId: "G-KD6JEDH7VQ",
+  apiKey: 'AIzaSyCSRq45aj8UC2sxCvCGUY36Tx5HqK31-xI',
+  authDomain: 'route-buddies.firebaseapp.com',
+  projectId: 'route-buddies',
+  storageBucket: 'route-buddies.appspot.com',
+  messagingSenderId: '915509205240',
+  appId: '1:915509205240:web:0dda338ef73dec7c07030d',
+  measurementId: 'G-KD6JEDH7VQ',
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -40,14 +40,17 @@ const loginUser = async (dispatch, navigate) => {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    await addDataToFirestore(user?.uid, {
-      uid: user?.uid,
-      fullName: user?.displayName,
-      email: user?.email,
-      avatar: user?.photoURL,
-    });
-    dispatch({ type: "LOGIN", payload: user });
-    navigate("/registration");
+    dispatch({ type: 'LOGIN', payload: user });
+    await addDataToFirestore(
+      user?.uid,
+      {
+        uid: user?.uid,
+        fullName: user?.displayName,
+        email: user?.email,
+        avatar: user?.photoURL,
+      },
+      navigate
+    );
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -61,11 +64,8 @@ const getCurrentUser = async (dispatch, navigate) => {
   try {
     await auth.onAuthStateChanged((user) => {
       if (user) {
-        const res = getUserData(user?.uid, dispatch);
-        if (!res) {
-          navigate("/registration");
-        }
-        dispatch({ type: "LOGIN", payload: user });
+        getUserData(user?.uid, dispatch, navigate);
+        dispatch({ type: 'LOGIN', payload: user });
       }
     });
   } catch (error) {
@@ -75,7 +75,7 @@ const getCurrentUser = async (dispatch, navigate) => {
 
 const logout = async (dispatch) => {
   try {
-    dispatch({ type: "LOGOUT" });
+    dispatch({ type: 'LOGOUT' });
     await auth.signOut();
   } catch (error) {
     console.log(error);
@@ -83,51 +83,50 @@ const logout = async (dispatch) => {
 };
 
 // Firestore methods
-const addDataToFirestore = async (uid, data) => {
+const addDataToFirestore = async (uid, data, navigate) => {
   try {
-    const docRef = doc(db, "Users", uid);
+    const docRef = doc(db, 'Users', uid);
+    const docSnapshot = await getDoc(docRef);
 
-    await setDoc(docRef, data);
-
-    console.log("Document written with ID: ", docRef.id);
+    if (!docSnapshot.exists()) {
+      await setDoc(docRef, data);
+      navigate('/registration');
+    }
   } catch (e) {
-    console.error("Error adding document: ", e);
+    console.error('Error adding document: ', e);
   }
 };
 
 const updateDataToFirestore = async (uid, data, dispatch) => {
   try {
-    const docRef = doc(db, "Users", uid);
+    const docRef = doc(db, 'Users', uid);
 
     await updateDoc(docRef, data);
-    dispatch({ type: "USER_DATA", payload: data });
+    dispatch({ type: 'USER_DATA', payload: data });
 
-    console.log("Document written with ID: ", docRef.id);
+    console.log('Document written with ID: ', docRef.id);
   } catch (e) {
-    console.error("Error adding document: ", e);
+    console.error('Error adding document: ', e);
   }
 };
 
 const getUserMatches = async () => {
   try {
-    const querySnapshot = await getDocs(collection(db, "Users"));
+    const querySnapshot = await getDocs(collection(db, 'Users'));
     return querySnapshot;
   } catch (error) {
     console.log(error);
   }
 };
 
-const getUserData = async (uid, dispatch) => {
+const getUserData = async (uid, dispatch, navigate) => {
   try {
-    const docRef = doc(db, "Users", uid);
+    const docRef = doc(db, 'Users', uid);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      dispatch({ type: "USER_DATA", payload: docSnap.data() });
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
+      dispatch({ type: 'USER_DATA', payload: docSnap.data() });
+      docSnap.data()?.routes ? navigate('/explore') : navigate('/registration');
     }
   } catch (error) {
     console.log(error);
