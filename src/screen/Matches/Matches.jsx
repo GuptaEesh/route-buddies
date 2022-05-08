@@ -30,18 +30,12 @@ const Matches = () => {
   }
 
   return (
-    <div>
+    <div className="w-screen min-h-screen flex flex-col items-center">
       {matches &&
         matches.map((match) => {
           const _id = match.participants.filter((id) => id != user?.uid)[0];
           const _user = match.users[_id];
-          return (
-            <ChatUserDisplay
-              user={_user}
-              key={_id}
-           
-            />
-          );
+          return <ChatUserDisplay user={_user} key={_id} />;
         })}
     </div>
   );
