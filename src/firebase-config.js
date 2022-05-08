@@ -90,7 +90,7 @@ const addDataToFirestore = async (uid, data, navigate) => {
 
     if (!docSnapshot.exists()) {
       await setDoc(docRef, data);
-      navigate("/registration");
+      navigate("/profile");
     }
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -126,7 +126,7 @@ const getUserData = async (uid, dispatch, navigate) => {
 
     if (docSnap.exists()) {
       dispatch({ type: "USER_DATA", payload: docSnap.data() });
-      docSnap.data()?.routes ? navigate("/explore") : navigate("/registration");
+      docSnap.data()?.routes ? navigate("/explore") : navigate("/profile");
     }
   } catch (error) {
     console.log(error);

@@ -4,12 +4,12 @@ import { Footer, NavBar } from "./components";
 import { RedirectsAuth, RequiresAuth } from "./router";
 import {
   Home,
-  UserRegistration,
   Explore,
   Settings,
   MatchProfile,
   Chat,
   Matches,
+  UserProfile,
 } from "./screen";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
         {/* Private Routes */}
 
         <Route element={<RequiresAuth />}>
-          <Route path="/registration" element={<UserRegistration />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/explore/:id" element={<MatchProfile />} />
           <Route path="/chat/:id" element={<Chat />} />
