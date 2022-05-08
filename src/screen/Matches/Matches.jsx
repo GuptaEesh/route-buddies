@@ -2,7 +2,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context";
 import { db } from "../../firebase-config";
-
+import { ChatUserDisplay } from "../../components";
 const Matches = () => {
   const {
     authState: { user },
@@ -35,7 +35,13 @@ const Matches = () => {
         matches.map((match) => {
           const _id = match.participants.filter((id) => id != user?.uid)[0];
           const _user = match.users[_id];
-          return <h2 key={_id}>{_user.fullName}</h2>;
+          return (
+            <ChatUserDisplay
+              user={_user}
+              key={_id}
+           
+            />
+          );
         })}
     </div>
   );
