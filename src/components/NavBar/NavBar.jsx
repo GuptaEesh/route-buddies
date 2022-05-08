@@ -37,17 +37,17 @@ const NavBar = () => {
             <div className="hidden sm:flex flex-row space-x-4">
               <Link
                 to="/settings"
-                className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-indigo-700 bg-white border border-indigo-700 focus:outline-none focus:bg-gray-200 hover:bg-gray-200 duration-150 justify-center items-center">
+                className="rounded-md flex space-x-2 w-24 h-10 font-medium text-md leading-3 text-indigo-600 bg-white border border-indigo-600 focus:outline-none focus:bg-gray-200 hover:bg-gray-200 duration-150 justify-center items-center">
                 Settings
               </Link>
               <Link
                 to="/matches"
-                className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-white bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-600 hover:bg-indigo-600 duration-150 justify-center items-center">
+                className="rounded-md flex space-x-2 w-24 h-10 font-medium text-md leading-3 text-white bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-700 hover:bg-indigo-700 duration-150 justify-center items-center">
                 Chats
               </Link>
               <button
                 onClick={() => logout(dispatch)}
-                className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-white bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-600 hover:bg-indigo-600 duration-150 justify-center items-center">
+                className="rounded-md flex space-x-2 w-24 h-10 font-medium text-md leading-3 text-white bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-700 hover:bg-indigo-700 duration-150 justify-center items-center">
                 Logout
               </button>
             </div>

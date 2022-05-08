@@ -12,7 +12,7 @@ function Home() {
   return (
     <div className="relative flex flex-col h-screen bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto lg:mx-0 h-full flex items-center justify-center lg:block">
-        <div className="relative z-10 pb-8 bg-white h-fit lg:h-[1000px] sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+        <div className="relative z-10 pb-8 bg-white h-full sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
           <svg
             className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
             fill="currentColor"
@@ -20,10 +20,9 @@ function Home() {
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <polygon points="50,0 100,0 50,100 0,100" />
           </svg>
 
-          <main className="mx-auto lg:h-full lg:flex lg:items-center max-w-7xl px-4 sm:px-6 lg:px-8 xl:pt-28">
+          <main className="mx-auto lg:h-full lg:flex lg:items-center max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="sm:text-center lg:text-left">
               <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                 <span className="block xl:inline">App to enrich your</span>{" "}
