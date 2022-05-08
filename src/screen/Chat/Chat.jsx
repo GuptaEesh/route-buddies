@@ -1,9 +1,12 @@
 import {
   addDoc,
   collection,
+  doc,
+  getDoc,
   onSnapshot,
   orderBy,
   query,
+  setDoc,
   Timestamp,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -44,6 +47,16 @@ const Chat = () => {
 
   const handleSubmit = async (e, msg, setMsg) => {
     e.preventDefault();
+
+    const docRef = doc(db, "messages", id);
+    const docSnapshot = await getDoc(docRef);
+
+    if (!docSnapshot.exists()) {
+      await setDoc(docRef, {
+        participants: [user1.uid, user2.uid],
+        users: { [user1.uid]: user1, [user2.uid]: user2 },
+      });
+    }
 
     await addDoc(collection(db, "messages", id, "chat"), {
       msg,
