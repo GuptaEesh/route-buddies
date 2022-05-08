@@ -18,7 +18,6 @@ const Chat = () => {
     (async () => {
       const fetchedMessages = await getChatRoom(data.fullName, user2);
       setMessages(fetchedMessages);
-      console.log(messages);
     })();
   }, []);
   return (

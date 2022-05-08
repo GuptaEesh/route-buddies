@@ -1,5 +1,4 @@
 const ChatMessage = ({ message, sender }) => {
-  console.log(message, sender);
   return (
     <div
       className={`flex items-center gap-x-4  mt-5  px-4 pb-4 w-full  ${

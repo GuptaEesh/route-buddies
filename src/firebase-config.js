@@ -157,13 +157,15 @@ const getChatMessages = async (currentRoom) => {
 
   const messagesSnapShot = await getDocs(messagesRef);
 
-  const messages = await messagesSnapShot.docs.map((doc) => doc.data());
+  const messages = await messagesSnapShot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
 
   return messages;
 };
 
 const getChatRoom = async (user1, user2) => {
-  console.log(user1, user2);
   try {
     let matchedRoom = null;
     const chatRoom = query(

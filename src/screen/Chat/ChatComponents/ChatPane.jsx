@@ -15,7 +15,7 @@ const ChatPane = ({ messages, sender, receiver }) => {
             <hr className="border  border-gray-200 my-4" />
             <div className="bg-white grow overflow-y-scroll">
               {messages?.map((message) => (
-                <ChatMessage key={message} message={message} sender={sender} />
+                <ChatMessage key={message.id} message={message} sender={sender} />
               ))}
             </div>
             <div className="mt-1">
