@@ -5,7 +5,7 @@ const ChatMessage = ({ message, sender }) => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollRef.current?.scrollIntoView({ behavior: "smooth", block: 'nearest', inline: 'start' });
   }, [message]);
 
   return (

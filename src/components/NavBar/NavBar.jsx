@@ -12,7 +12,6 @@ const NavBar = () => {
   return (
     <div className=" bg-white ">
       <nav className="2xl:container 2xl:mx-auto sm:py-6 sm:px-7 py-5 px-4">
-        {/* For large and Medium-sized Screen */}
         <div className="flex justify-between ">
           <div className=" flex space-x-3 items-center">
             <svg
@@ -45,14 +44,13 @@ const NavBar = () => {
               </Link>
               <Link
                 to="/matches"
-                className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-white bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-600 hover:bg-indigo-600 duration-150 justify-center items-center"
+                className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-white bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-700 hover:bg-indigo-700 duration-150 justify-center items-center"
               >
                 Chats
               </Link>
               <button
                 onClick={() => logout(dispatch)}
-                className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-white bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-600 hover:bg-indigo-600 duration-150 justify-center items-center"
-              >
+                className="rounded-md flex space-x-2 w-24 h-10 font-medium text-md leading-3 text-white bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-700 hover:bg-indigo-700 duration-150 justify-center items-center">
                 Logout
               </button>
             </div>

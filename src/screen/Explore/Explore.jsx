@@ -41,13 +41,12 @@ const Explore = () => {
   }
 
   return (
-    <div className="w-screen flex flex-col items-center ">
+    <div className='w-screen min-h-screen flex flex-col items-center '>
       {userMatches.map((user) => (
         <ProfileViewer
           key={user.uid}
           id={user.uid}
           userName={user.fullName}
-          userStatus={user.description}
           designation={user.profession}
           source={user.routes[0].start}
           destination={user.routes[0].end}
