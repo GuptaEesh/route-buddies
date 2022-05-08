@@ -2,7 +2,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context";
 import { db } from "../../firebase-config";
-import { ChatUserDisplay } from "../../components";
+import { ChatUserDisplay, EmptyMatches } from "../../components";
 const Matches = () => {
   const {
     authState: { user },
@@ -25,9 +25,7 @@ const Matches = () => {
     })();
   }, []);
 
-  if (!matches.length) {
-    return <h3>No messages yet!</h3>;
-  }
+  if (!matches.length) return <EmptyMatches message={"No chats found..."} />
 
   return (
     <div className="w-screen min-h-screen flex flex-col items-center">

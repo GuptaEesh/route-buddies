@@ -5,3 +5,5 @@ export { NavBar } from "./NavBar/NavBar";
 export { ProfileViewer } from "./ProfileViewer/ProfileViewer";
 
 export { ChatUserDisplay } from "./ChatUserDisplay/ChatUserDisplay";
+
+export { EmptyMatches } from "./EmptyMatches/EmptyMatches.jsx";
