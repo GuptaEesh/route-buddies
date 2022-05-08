@@ -153,12 +153,13 @@ const getMatchedUserData = async (uid) => {
 };
 
 const getChatMessages = async (currentRoom) => {
-  console.log(currentRoom);
-  // let messages = null
-  // const messages = query(
-  //   collection(db, "ChatRooms"),
-  //   where("user1", "==", user1) && where("user2", "==", user2)
-  // );
+  const messagesRef = collection(db, "ChatRooms", currentRoom.id, "Messages");
+
+  const messagesSnapShot = await getDocs(messagesRef);
+
+  const messages = await messagesSnapShot.docs.map((doc) => doc.data());
+
+  return messages;
 };
 
 const getChatRoom = async (user1, user2) => {
@@ -187,17 +188,16 @@ const getChatRoom = async (user1, user2) => {
         user2: user2,
       });
 
-      console.log(newRoom)
+      const chatRoomRef = doc(db, "ChatRooms", newRoom.id);
+      const chatRoomSnapShot = await getDoc(chatRoomRef);
 
-      newRoom.forEach((doc) => {
-        matchedRoom = {
-          id: doc.id,
-          data: doc.data(),
-        };
-      });
+      matchedRoom = {
+        id: newRoom.id,
+        data: chatRoomSnapShot.data(),
+      };
     }
 
-    getChatMessages(matchedRoom);
+    return getChatMessages(matchedRoom);
   } catch (error) {
     console.log(error);
   }
