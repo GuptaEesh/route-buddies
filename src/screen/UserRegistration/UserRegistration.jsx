@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context';
@@ -85,6 +86,7 @@ const UserRegistration = () => {
 
                   <form
                     onSubmit={submitHandler}
+
                     className='col-auto md:col-start-3 md:col-span-3'
                   >
                     <div>

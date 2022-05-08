@@ -30,6 +30,7 @@ const ProfileViewer = ({
               className='text-xs leading-3 text-gray-500 
                                  pt-2'
             >
+
               {designation}
             </p>
           </div>
@@ -75,10 +76,11 @@ const ProfileViewer = ({
         </div>
       </div>
 
-      <div className='flex items-end justify-center'>
+
+      <div className="flex items-end justify-center">
         <Link
           to={`/explore/${id}`}
-          className=' text-xs font-medium leading-3 text-white py-3 px-4 rounded bg-indigo-700 focus:outline-none hover:opacity-90'
+          className=" text-xs font-medium leading-3 text-white py-3 px-4 rounded bg-indigo-700 focus:outline-none hover:opacity-90"
         >
           Open Profile Page
         </Link>
