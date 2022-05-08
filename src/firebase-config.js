@@ -157,12 +157,12 @@ const getChatMessages = async (currentRoom) => {
 
   const messagesSnapShot = await getDocs(messagesRef);
 
-  const messages = await messagesSnapShot.docs.map((doc) => ({
+  let messages = await messagesSnapShot.docs.map((doc) => ({
     ...doc.data(),
     id: doc.id,
   }));
 
-  return messages;
+  return { messages, roomId: currentRoom.id };
 };
 
 const getChatRoom = async (user1, user2) => {
@@ -205,6 +205,14 @@ const getChatRoom = async (user1, user2) => {
   }
 };
 
+const addNewMessage = async (msg, roomId) => {
+  const messagesRef = collection(db, "ChatRooms", roomId, "Messages");
+
+  const updatedMessages = await addDoc(messagesRef, msg);
+
+  console.log(updatedMessages);
+};
+
 export {
   auth,
   db,
@@ -216,4 +224,5 @@ export {
   getUserMatches,
   getMatchedUserData,
   getChatRoom,
+  addNewMessage,
 };
