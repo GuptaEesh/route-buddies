@@ -1,6 +1,5 @@
 export const initialState = {
   token: localStorage.getItem("token") ?? null,
-  // user: localStorage.getItem("token"),
   loading: false,
 };
 
