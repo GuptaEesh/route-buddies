@@ -12,7 +12,6 @@ const NavBar = () => {
   return (
     <div className=" bg-white ">
       <nav className="2xl:container 2xl:mx-auto sm:py-6 sm:px-7 py-5 px-4">
-        {/* For large and Medium-sized Screen */}
         <div className="flex justify-between ">
           <div className=" flex space-x-3 items-center">
             <svg

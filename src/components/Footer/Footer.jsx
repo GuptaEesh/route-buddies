@@ -28,20 +28,12 @@ const Footer = () => {
             </Link>
           </div>
           <p className="mt-6 text-xs lg:text-sm leading-none text-gray-900 dark:text-gray-50">
-<<<<<<< HEAD
             2022 RouteBuddies © All Rights Reserved.
-=======
-            2022 RouterBuddies @ All Rights Reserved.
->>>>>>> f27a0593f3d85a0a24c966395972609797131e01
           </p>
         </div>
       </footer>
     </div>
   );
-<<<<<<< HEAD
-}
-=======
 };
->>>>>>> f27a0593f3d85a0a24c966395972609797131e01
 
 export { Footer };
