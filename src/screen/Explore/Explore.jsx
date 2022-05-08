@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ProfileViewer } from "../../components";
+import { EmptyMatches, ProfileViewer } from "../../components";
 import { useAuth } from "../../context";
 import { getUserMatches } from "../../firebase-config";
 
@@ -31,14 +31,7 @@ const Explore = () => {
     })();
   }, [data]);
 
-  if (!userMatches?.length) {
-    return (
-      <div className="w-screen flex flex-col items-center ">
-        <h2>No Matches Found!</h2>
-        <h3>Please try again with some other routes!</h3>
-      </div>
-    );
-  }
+  if (!userMatches?.length) return <EmptyMatches message={"No matches found..."} />;
 
   return (
     <div className='w-screen min-h-screen flex flex-col items-center '>
