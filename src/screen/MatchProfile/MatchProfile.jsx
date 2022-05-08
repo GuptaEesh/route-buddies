@@ -5,20 +5,20 @@ import { getMatchedUserData } from "../../firebase-config";
 const MatchProfile = ({
   userCoverImg = "https://tuk-cdn.s3.amazonaws.com/assets/components/grid_cards/gc_29.png",
 }) => {
-  const [matchedUser, setMatchedUser] = useState()
+  const [matchedUser, setMatchedUser] = useState();
 
   const { id } = useParams();
 
   useEffect(() => {
     (async () => {
       const res = await getMatchedUserData(id);
-      setMatchedUser(res)
+      setMatchedUser(res);
     })();
   }, [id]);
 
   console.log(matchedUser);
 
-  if(!matchedUser) return <h1>Loading...</h1>
+  if (!matchedUser) return <h1>Loading...</h1>;
 
   return (
     <>
@@ -187,7 +187,7 @@ const MatchProfile = ({
               <div className="w-full flex-col md:flex-row justify-center flex pt-6">
                 <Link
                   to={`/chat/${id}`}
-                  state={{ user2: matchedUser.fullName }}
+                  state={{ user2: matchedUser }}
                   className="ml-0 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-3 md:px-6 py-2 text-sm"
                 >
                   Message

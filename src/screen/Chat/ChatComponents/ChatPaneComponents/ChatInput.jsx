@@ -2,10 +2,7 @@ import { RiSendPlane2Fill } from "react-icons/ri";
 
 const ChatInput = ({ handleSubmit, newMsg, setNewMsg }) => {
   return (
-    <div
-      onSubmit={(e) => handleSubmit(e)}
-      className="lg:max-w-[548px] w-full mx-auto"
-    >
+    <div onSubmit={handleSubmit} className="lg:max-w-[60vw] w-full mx-auto">
       <form className="relative">
         <input
           className="relative text-sm leading-none text-gray-600 bg-white  rounded  w-full px-10 py-4 outline-none"
