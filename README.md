@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="/public/logo512.png" alt="RouteBuddies logo" width="96px" height="96px" style="background-color: black; border-radius: 50%;" />
+  
+# RouteBuddies
 
-## Available Scripts
+### Solve travel woes and grow networks!
 
-In the project directory, you can run:
 
-### `npm start`
+You can be guaranteed an easy, comfortable and safe journey, while getting to interact with variety of people and professions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Forks](https://img.shields.io/github/forks/GuptaEesh/route-buddies)
+![Stars](https://img.shields.io/github/stars/GuptaEesh/route-buddies )
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+</div>
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Live Deployment
 
-### `npm run build`
+Checkout the live website [here](https://route-buddies.netlify.app/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## About
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+RouteBuddies is a webapp that links travellers that share common interests, and a common route too!
 
-### `npm run eject`
+We aim to resolve typical large cities woes with obtaining transport to travel to various locations both with ease and light on one's pocket.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Single Sign-On with Google Authentication
+- Setup a profile that allows you to link to common users
+- View users in your area who are travelling to/from the same location as you.
+- Text based realtime interaction with matched users
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Built with
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Frontend
+    - React JS (v18.1.0)
+    - TailwindCSS and TailwindUI
+    - React Router v6
 
-### Code Splitting
+- Backend
+    - Firebase and Firestore
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Hosting
+    - Netlify
 
-### Analyzing the Bundle Size
+- Illustrations from Storyset/Undraw
+- Images hosted on Cloudinary CDN
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Getting Started
 
-### Advanced Configuration
+To get a local copy up and running follow these simple steps.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Prerequisites
 
-### Deployment
+- NodeJS
+- VS Code
+- Firebase and Firestore
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Installation
 
-### `npm run build` fails to minify
+1. Clone the repo in your local machine and open the project in VS Code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. To install the required dependencies use
+
+```sh
+npm install
+```
+
+3. To run the app in the localhost use
+
+```sh
+npm start
+```
+
+
+
+---
+## Preview
+
+<img src="./preview/Preview.mp4" alt="RouteBuddies webapp preview" />
+
+---
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
+
