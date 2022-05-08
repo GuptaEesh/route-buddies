@@ -3,6 +3,7 @@ import {
   getFirestore,
   doc,
   setDoc,
+  addDoc,
   updateDoc,
   collection,
   query,
@@ -151,6 +152,57 @@ const getMatchedUserData = async (uid) => {
   }
 };
 
+const getChatMessages = async (currentRoom) => {
+  console.log(currentRoom);
+  // let messages = null
+  // const messages = query(
+  //   collection(db, "ChatRooms"),
+  //   where("user1", "==", user1) && where("user2", "==", user2)
+  // );
+};
+
+const getChatRoom = async (user1, user2) => {
+  console.log(user1, user2);
+  try {
+    let matchedRoom = null;
+    const chatRoom = query(
+      collection(db, "ChatRooms"),
+      where("user1", "==", user1) && where("user2", "==", user2)
+    );
+    const chatSnapShot = await getDocs(chatRoom);
+
+    chatSnapShot.forEach((doc) => {
+      matchedRoom = {
+        id: doc.id,
+        data: doc.data(),
+      };
+    });
+
+    if (!matchedRoom) {
+      const docRef = collection(db, "ChatRooms");
+
+      const newRoom = await addDoc(docRef, {
+        roomName: `${user1} - ${user2}`,
+        user1: user1,
+        user2: user2,
+      });
+
+      console.log(newRoom)
+
+      newRoom.forEach((doc) => {
+        matchedRoom = {
+          id: doc.id,
+          data: doc.data(),
+        };
+      });
+    }
+
+    getChatMessages(matchedRoom);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   auth,
   db,
@@ -161,4 +213,5 @@ export {
   updateDataToFirestore,
   getUserMatches,
   getMatchedUserData,
+  getChatRoom,
 };
