@@ -4,27 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context';
 import { updateDataToFirestore } from '../../firebase-config';
 
-const UserRegistration = () => {
+const UserProfile = () => {
   const {
-    authState: { user },
+    authState: { user, data },
     dispatch,
   } = useAuth();
   const initialData = {
     uid: user?.uid,
-    fullName: user.displayName ?? '',
+    fullName: user?.displayName ?? '',
     avatar:
       user.photoURL ??
       'https://tuk-cdn.s3.amazonaws.com/assets/components/avatars/a_5.png',
-    profession: '',
-    description: '',
-    mode: '',
-    routes: [{ start: '', end: '' }],
+    profession: data?.profession ?? '',
+    description: data?.description ?? '',
+    mode: data?.mode ?? '',
+    routes: data?.routes ?? [{ start: '', end: '' }],
   };
   const navigate = useNavigate();
   const [registeredUser, setRegisteredUser] = useState(initialData);
-  // const [isShowRouteInput, setIsShowRouteInput] = useState(false);
-  // const [checkpoint, setCheckpoint] = useState({});
-  // const [route, setRoute] = useState([{}]);
+
   const inputHandler = (e) => {
     setRegisteredUser((userFields) => ({
       ...userFields,
@@ -48,19 +46,6 @@ const UserRegistration = () => {
       routes: [{ ...user.routes[0], end: e.target.value }],
     }));
   };
-
-  // const handleRoute = () => {
-  //   setRoute((prev) => [...prev, {checkpoint}])
-  //   console.log(route)
-  //   setCheckpoint({})
-  // }
-
-  //     handleRoute()
-
-  // const handleAddCheckpoint = (e) => {
-  //   const { name, value } = e.target;
-  //   setCheckpoint({[name] : value});
-  // };
 
   return (
     <div className='px-2 py-12 '>
@@ -222,4 +207,4 @@ const UserRegistration = () => {
   );
 };
 
-export { UserRegistration };
+export { UserProfile };
