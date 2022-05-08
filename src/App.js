@@ -4,7 +4,6 @@ import { RedirectsAuth, RequiresAuth } from "./router";
 import {
   Home,
   Explore,
-  Settings,
   MatchProfile,
   Chat,
   Matches,
@@ -30,7 +29,6 @@ function App() {
           <Route path="/explore/:id" element={<MatchProfile />} />
           <Route path="/chat/:id" element={<Chat />} />
           <Route path="/matches" element={<Matches />} />
-          <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
       <Footer />
