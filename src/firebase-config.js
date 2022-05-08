@@ -169,7 +169,10 @@ const getChatRoom = async (user1, user2) => {
     let matchedRoom = null;
     const chatRoom = query(
       collection(db, "ChatRooms"),
-      where("user1", "==", user1), where("user2", "==", user2)
+      where("user1", "==", user1) &&
+      where("user2", "==", user2)||
+      where("user2", "==", user1) &&
+      where("user1", "==", user2)
     );
     const chatSnapShot = await getDocs(chatRoom);
 
