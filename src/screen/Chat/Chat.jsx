@@ -24,15 +24,13 @@ const Chat = () => {
   }, [submittedMsg]);
 
   return (
-    messages?.messages?.length && (
-      <ChatPane
-        messages={messages}
-        setSubmittedMsg={setSubmittedMsg}
-        senderImg={data.avatar}
-        sender={data.fullName}
-        receiver={user2}
-      />
-    )
+    <ChatPane
+      messages={messages}
+      setSubmittedMsg={setSubmittedMsg}
+      senderImg={data.avatar}
+      sender={data.fullName}
+      receiver={user2}
+    />
   );
 };
 
