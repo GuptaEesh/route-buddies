@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import { Footer, NavBar } from "./components";
 import { RedirectsAuth, RequiresAuth } from "./router";
 import {
@@ -14,7 +13,7 @@ import {
 
 function App() {
   return (
-    <div className="App">
+    <div className="overflow-x-hidden">
       <NavBar />
       <Routes>
         {/* Public Routes */}
