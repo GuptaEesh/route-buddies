@@ -19,31 +19,29 @@ function Home() {
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
             aria-hidden="true"
-          >
-          </svg>
+          ></svg>
 
           <main className="mx-auto lg:h-full lg:flex lg:items-center max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="sm:text-center lg:text-left">
               <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span className="block xl:inline">App to enrich your</span>{" "}
+                <span className="block xl:inline">Travelling is broken.</span>{" "}
                 <span className="block text-indigo-600 xl:inline">
-                  life with free friends and free rides
+                  Let&apos;s fix that.
                 </span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Helps to overcome traffic, pollution, unavailability and
-                expensive costs of other means of transport and allows
-                possibility of growing network
+                With RouteBuddies, we aim to solve usual travel woes while also
+                allowing the possibility of growing your network.
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
                   <button
                     onClick={() =>
                       token
-                        ? navigate('/profile')
+                        ? navigate("/profile")
                         : loginUser(dispatch, navigate)
                     }
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-700 hover:bg-indigo-700 duration-150 md:py-4 md:text-lg md:px-10"
                   >
                     Get started
                   </button>
