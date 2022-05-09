@@ -90,7 +90,7 @@ npm start
 ---
 ## Preview
 
-<img src="./preview/Preview.mp4" alt="RouteBuddies webapp preview" />
+<img src="./preview/routebuddies-preview.gif" alt="RouteBuddies webapp preview" />
 
 ---
 ## License
