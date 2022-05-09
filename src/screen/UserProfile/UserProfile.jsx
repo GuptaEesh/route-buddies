@@ -46,6 +46,18 @@ const UserProfile = () => {
     }));
   };
 
+  const handleDefault = (e) => {
+    e.preventDefault();
+    setRegisteredUser((prev) => ({
+      ...prev,
+      profession: "Test Engineer",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, excepturi.",
+      mode: "Car",
+      routes: [{ start: "Lucknow", end: "Kanpur" }],
+    }));
+  };
+
   return (
     <div className="px-2 py-12 ">
       <div className="flex flex-no-wrap items-start">
@@ -136,6 +148,7 @@ const UserProfile = () => {
                         value={registeredUser.routes[0].start}
                         className="w-full p-3 ml-5 border border-gray-300 rounded outline-none focus:bg-gray-50"
                         onChange={startLocationHandler}
+                        defaultValue="Lucknow"
                       />
                     </div>
                     <div className="flex items-center lg:max-w-[500px] w-full mt-10 mx-auto">
@@ -149,9 +162,16 @@ const UserProfile = () => {
                         value={registeredUser.routes[0].end}
                         className="w-full p-3 ml-7 border border-gray-300 rounded outline-none focus:bg-gray-50"
                         onChange={endLocationHandler}
+                        defaultValue="Kanpur"
                       />
                     </div>
                     <div className="flex mt-8 flex-col flex-wrap justify-self-start w-full px-7 md:flex-row md:justify-end gap-x-4 gap-y-4">
+                      <button
+                        onClick={(e) => handleDefault(e)}
+                        className="bg-white border-indigo-700 rounded hover:bg-gray-50 transform duration-300 ease-in-out text-sm font-medium px-6 py-4 text-indigo-700 border md:max-w-[200px]  w-full "
+                      >
+                        Fill with test data
+                      </button>
                       <button className="bg-white border-indigo-700 rounded hover:bg-gray-50 transform duration-300 ease-in-out text-sm font-medium px-6 py-4 text-indigo-700 border md:max-w-[95px]  w-full ">
                         Cancel
                       </button>
